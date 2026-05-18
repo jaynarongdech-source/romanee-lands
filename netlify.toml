@@ -1,0 +1,40 @@
+# netlify.toml
+# ──────────────────────────────────────────────────────────────
+# Romanee Land Manager — Netlify Configuration
+# ──────────────────────────────────────────────────────────────
+
+[build]
+  publish   = "."          # HTML อยู่ root
+  functions = "netlify/functions"
+
+# ── Redirect API calls → Functions ──
+[[redirects]]
+  from   = "/api/dol-proxy"
+  to     = "/.netlify/functions/dol-proxy"
+  status = 200
+
+[[redirects]]
+  from   = "/api/analyze-image"
+  to     = "/.netlify/functions/analyze-image"
+  status = 200
+
+[[redirects]]
+  from   = "/api/sheets"
+  to     = "/.netlify/functions/sheets"
+  status = 200
+
+# ── Security Headers ──
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+
+# ── CORS สำหรับ API ──
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin  = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
