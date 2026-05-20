@@ -14,6 +14,11 @@
   status = 200
 
 [[redirects]]
+  from   = "/api/gas"
+  to     = "/.netlify/functions/gas"
+  status = 200
+
+[[redirects]]
   from   = "/api/analyze-image"
   to     = "/.netlify/functions/analyze-image"
   status = 200
